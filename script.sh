@@ -52,17 +52,17 @@ function showIPs {
 }
 
 function most_visit_URLs {
-    echo 10 Most URLs Visited:
-    awk '{count[$7]++} END {for (url in count) print url, count[url]}' $log | sort -k 2nr | head -n 10
-    awk '{count[$7]++} END {for (url in count) print url, count[url]}' $log | sort -k 2nr | head -n 10 > MostVisitedURLs.txt
+    echo 5 Most URLs Visited:
+    awk '{count[$7]++} END {for (url in count) print url, count[url]}' $log | sort -k 2nr | head -n 5
+    awk '{count[$7]++} END {for (url in count) print url, count[url]}' $log | sort -k 2nr | head -n 5 > MostVisitedURLs.txt
 }
 
 function topIPs {
     cat $log | awk '{ print $1}' | sort | uniq | wc | awk '{print $1 " IPs without repetition found" }'
     cat $log | awk -F\" '{ print $1 }'| wc | awk '{print "All of IPs are: " $1}'
-    echo Top 20 IPs:
-    awk '{print count "times {" $1 "} IP is repeated."}' $log | sort | uniq -c  | sort -nr | head -n 20
-    awk '{print count "times {" $1 "} IP is repeated."}' $log | sort | uniq -c  | sort -nr | head -n 20 > TopIPs.txt
+    echo Top 10 IPs:
+    awk '{print count "times {" $1 "} IP is repeated."}' $log | sort | uniq -c  | sort -nr | head -n 10
+    awk '{print count "times {" $1 "} IP is repeated."}' $log | sort | uniq -c  | sort -nr | head -n 10 > TopIPs.txt
 }
 
 function popular_browser {
