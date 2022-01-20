@@ -12,7 +12,7 @@ do
     echo    "2- most_visit_URLs"
     echo    "3- topIPs"
     echo    "4- popular_browser"
-
+    echo    "5- maxvisitorsOS"
 
     read -p "select number: " selection
     
@@ -21,6 +21,7 @@ do
 	2) most_visit_URLs;;
     3) topIPs;;
     4) popular_browser;;
+    5) maxvisitorsOS;;
 
     esac
     
@@ -69,7 +70,12 @@ function popular_browser {
     figlet Result
     printf "You can see this file in this directory that show list of top 10 browser.\n\n"
     printf '1- *popularBrowsers.txt\n\n'
-    again
+}
+
+function maxvisitorsOS {
+    echo Top 5 visitors Opeation Systems:
+    awk '{count[$13]++} END {for (os in count) print os, count[os]}' $log | sort -k 2nr | head -n 5
+    awk '{count[$13]++} END {for (os in count) print os, count[os]}' $log | sort -k 2nr | head -n 5 > VisitorsOS.txt
 }
 
 input
