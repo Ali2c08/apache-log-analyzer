@@ -11,6 +11,8 @@ do
     echo    "1- Show IPs"
     echo    "2- most_visit_URLs"
     echo    "3- topIPs"
+    echo    "4- popular_browser"
+
 
     read -p "select number: " selection
     
@@ -18,6 +20,7 @@ do
     1) showIPs;;
 	2) most_visit_URLs;;
     3) topIPs;;
+    4) popular_browser;;
 
     esac
     
@@ -59,6 +62,14 @@ function topIPs {
     echo Top 20 IPs:
     awk '{print count "times {" $1 "} IP is repeated."}' $log | sort | uniq -c  | sort -nr | head -n 20
     awk '{print count "times {" $1 "} IP is repeated."}' $log | sort | uniq -c  | sort -nr | head -n 20 > TopIPs.txt
+}
+
+function popular_browser {
+    awk '{brow[$(NF)]++} END {for (item in brow) print item, brow[item]}' $file | sort -k 2nr | head -n 10 > "$file1"popularBrowsers.txt
+    figlet Result
+    printf "You can see this file in this directory that show list of top 10 browser.\n\n"
+    printf '1- *popularBrowsers.txt\n\n'
+    again
 }
 
 input
